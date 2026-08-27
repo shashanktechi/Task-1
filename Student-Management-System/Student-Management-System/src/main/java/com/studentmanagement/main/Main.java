@@ -7,7 +7,6 @@ import com.studentmanagement.model.Student;
 import com.studentmanagement.repository.StudentRepository;
 import com.studentmanagement.service.StudentService;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 

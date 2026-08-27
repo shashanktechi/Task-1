@@ -22,7 +22,7 @@ Task 1 of the Java Full Stack Development Internship (Sumerix Global).
 
 ## Project Structure
 
-```
+```text
 Student-Management-System/
 ├── src/main/java/com/studentmanagement/
 │   ├── model/         -> Student.java
@@ -41,16 +41,19 @@ Student-Management-System/
 ## How to Run
 
 ### Option 1: IntelliJ IDEA / Eclipse / VS Code
+
 1. Open the project folder as a Maven project.
 2. Run `Main.java` (located in `com.studentmanagement.main`).
 
 ### Option 2: Command line (Maven installed)
+
 ```bash
 mvn compile
 mvn exec:java -Dexec.mainClass="com.studentmanagement.main.Main"
 ```
 
 ### Option 3: Plain javac/java
+
 ```bash
 cd src/main/java
 javac com/studentmanagement/**/*.java com/studentmanagement/main/Main.java
@@ -59,14 +62,41 @@ java com.studentmanagement.main.Main
 
 ## Sample Menu
 
-```
+```text
 1. Add Student
 2. View All Students
 3. Update Student
 4. Delete Student
 5. Search Student
-6. Exit
+6. Sort Students by Marks
+7. Exit
 ```
+
+## Screenshots
+
+Here are some screenshots demonstrating the application's functionality:
+
+- **Add Student:**  
+  ![Add Student](screenshots/add.png)
+- **View All Students:**  
+  ![View Students](screenshots/view.png)
+- **Update Student:**  
+  ![Update Student](screenshots/update.png)
+- **Search Student:**  
+  ![Search Student](screenshots/search.png)
+- **Delete Student:**  
+  ![Delete Student](screenshots/delete.png)
+
+## How I Validated It
+
+The application has been manually tested across all core functional paths to ensure robust behavior and data integrity:
+
+1. **Add:** Attempted to add valid students (success) and invalid students (e.g., negative age, blank names) to ensure `InputValidator` and `InvalidStudentDataException` handle bad data gracefully.
+2. **View:** Verified the table format perfectly aligns and displays all currently stored student records.
+3. **Update:** Modified an existing student's details and ensured both the in-memory list and storage file reflect the change.
+4. **Search:** Confirmed that searching by both ID and Name returns the expected results, handling edge cases like non-existent records correctly via `StudentNotFoundException`.
+5. **Delete:** Removed a student by ID, verifying that the student no longer appears in the "View All Students" list and is permanently erased.
+6. **File Persistence Confirmation:** Checked `data/students.txt` after every mutating operation (add, update, delete) to confirm the data is instantly saved and remains consistent after restarting the application. Evaluated the new rollback handling by confirming `DataStorageException` prevents memory corruption if disk writes fail.
 
 ## Design Notes
 
@@ -86,7 +116,6 @@ java com.studentmanagement.main.Main
 
 - Migrate storage from flat file to MySQL via JDBC (Task 2)
 - Add unit tests with JUnit
-- Add sorting/filtering (by marks, course)
 - Package as an executable JAR
 
 ## Author
