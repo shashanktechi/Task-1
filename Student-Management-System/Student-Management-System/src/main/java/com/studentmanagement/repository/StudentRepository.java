@@ -1,5 +1,6 @@
 package com.studentmanagement.repository;
 
+import com.studentmanagement.exception.DataStorageException;
 import com.studentmanagement.model.Student;
 
 import java.io.*;
@@ -15,12 +16,12 @@ public class StudentRepository {
 
     private final String filePath;
 
-    public StudentRepository(String filePath) {
+    public StudentRepository(String filePath) throws DataStorageException {
         this.filePath = filePath;
         ensureFileExists();
     }
 
-    private void ensureFileExists() {
+    private void ensureFileExists() throws DataStorageException {
         File file = new File(filePath);
         File parentDir = file.getParentFile();
         try {
@@ -31,14 +32,14 @@ public class StudentRepository {
                 file.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("Warning: could not initialize data file - " + e.getMessage());
+            throw new DataStorageException("Could not initialize data file.", e);
         }
     }
 
     /**
      * Loads every student currently stored in the file.
      */
-    public List<Student> loadAll() {
+    public List<Student> loadAll() throws DataStorageException {
         List<Student> students = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -48,7 +49,7 @@ public class StudentRepository {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading student data: " + e.getMessage());
+            throw new DataStorageException("Error reading student data.", e);
         }
         return students;
     }
@@ -58,14 +59,14 @@ public class StudentRepository {
      * Called after every add/update/delete so the file always reflects
      * the latest in-memory state.
      */
-    public void saveAll(List<Student> students) {
+    public void saveAll(List<Student> students) throws DataStorageException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
             for (Student s : students) {
                 writer.write(s.toFileFormat());
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error saving student data: " + e.getMessage());
+            throw new DataStorageException("Error saving student data.", e);
         }
     }
 }

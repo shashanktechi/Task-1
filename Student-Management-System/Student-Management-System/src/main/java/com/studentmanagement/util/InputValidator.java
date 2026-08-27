@@ -12,8 +12,8 @@ public class InputValidator {
         if (name == null || name.trim().isEmpty()) {
             throw new InvalidStudentDataException("Name cannot be empty.");
         }
-        if (!name.matches("[a-zA-Z ]+")) {
-            throw new InvalidStudentDataException("Name must contain only letters and spaces.");
+        if (!name.matches("[a-zA-Z \\-']+")) {
+            throw new InvalidStudentDataException("Name must contain only letters, spaces, hyphens, and apostrophes.");
         }
     }
 
@@ -30,7 +30,7 @@ public class InputValidator {
     }
 
     public static void validateMarks(double marks) throws InvalidStudentDataException {
-        if (marks < 0 || marks > 100) {
+        if (Double.isNaN(marks) || Double.isInfinite(marks) || marks < 0 || marks > 100) {
             throw new InvalidStudentDataException("Marks must be between 0 and 100.");
         }
     }
