@@ -77,15 +77,13 @@ java com.studentmanagement.main.Main
 Here are some screenshots demonstrating the application's functionality:
 
 - **Add Student:**  
-  ![Add Student](screenshots/add.png)
+  ![Add Student](OUTPUT%20Screen%20Shots/ADD1.png)
 - **View All Students:**  
-  ![View Students](screenshots/view.png)
+  ![View Students](OUTPUT%20Screen%20Shots/View1.png)
 - **Update Student:**  
-  ![Update Student](screenshots/update.png)
-- **Search Student:**  
-  ![Search Student](screenshots/search.png)
+  ![Update Student](OUTPUT%20Screen%20Shots/Update1.png)
 - **Delete Student:**  
-  ![Delete Student](screenshots/delete.png)
+  ![Delete Student](OUTPUT%20Screen%20Shots/Del.png)
 
 ## How I Validated It
 
